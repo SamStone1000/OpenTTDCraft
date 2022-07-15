@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "ottdmc",
+  "version": "${version}",
+
+  "name": "OpenTTDCraft",
+  "description": "This mod adds in industries in the style of OpenTTD",
+  "authors": [
+    "Stone"
+  ],
+
+  "license": "GPL-3",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "stone.ottdmc.Main"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "minecraft": "1.14.4"
+  },
+  "suggests": {
+    "ImmersiveRailroading": "*"
+  }
+}
