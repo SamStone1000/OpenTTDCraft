@@ -30,11 +30,6 @@ public class PowerIndustryBlockEntity extends ConsumerIndustryBlockEntity {
 		super(type);
 	}
 
-	@Override
-	public ItemStack getInvStack(int slot) {
-		return new ItemStack(Items.COAL, 1);
-	}
-
 	public PowerIndustryBlockEntity() {
 		super(Main.POWER_INDUSTRY_TYPE);
 	}

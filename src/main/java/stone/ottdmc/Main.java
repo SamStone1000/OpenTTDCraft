@@ -18,6 +18,7 @@
 package stone.ottdmc;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -30,6 +31,7 @@ import net.minecraft.util.registry.Registry;
 import stone.ottdmc.block.CoalIndustryBlock;
 import stone.ottdmc.block.PowerIndustryBlock;
 import stone.ottdmc.block.entity.CoalIndustryBlockEntity;
+import stone.ottdmc.block.entity.IndustryBlockEntity;
 import stone.ottdmc.block.entity.PowerIndustryBlockEntity;
 
 public class Main implements ModInitializer {
@@ -61,6 +63,11 @@ public class Main implements ModInitializer {
 		POWER_INDUSTRY_TYPE = Registry.register(Registry.BLOCK_ENTITY, new Identifier(MOD_ID, "power_industry"),
 				BlockEntityType.Builder.create(PowerIndustryBlockEntity::new,
 						POWER_INDUSTRY_BLOCK).build(null));
+
+		ServerTickEvents.START_WORLD_TICK.register((world) ->
+		{
+			IndustryBlockEntity.tickTime++;
+		});
 	}
 
 }

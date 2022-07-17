@@ -19,6 +19,7 @@ package stone.ottdmc.block.entity;
 
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
 
 public abstract class ProducerIndustryBlockEntity extends IndustryBlockEntity {
@@ -71,7 +72,12 @@ public abstract class ProducerIndustryBlockEntity extends IndustryBlockEntity {
 
 	private ItemStack getProduct() {
 		if (tempProduct.isEmpty())
+		{
 			tempProduct = _getProduct().copy();
+			CompoundTag tag = new CompoundTag();
+			tag.putLong("createdat", tickTime);
+			tempProduct.setTag(tag);
+		}
 		return tempProduct;
 	}
 
