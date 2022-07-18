@@ -15,16 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenTTDCraft. If not, see <https://www.gnu.org/licenses/>.
  */
+
 package stone.ottdmc.block.entity;
 
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import stone.ottdmc.Main;
+import stone.ottdmc.item.CargoItemStack;
 
 public class CoalIndustryBlockEntity extends ProducerIndustryBlockEntity {
 
-	private static final ItemStack product = new ItemStack(Items.COAL, 64);
+	private static final CargoItemStack product = new CargoItemStack(Items.COAL, 64);
 
 	public CoalIndustryBlockEntity(BlockEntityType<?> type) {
 		super(type);

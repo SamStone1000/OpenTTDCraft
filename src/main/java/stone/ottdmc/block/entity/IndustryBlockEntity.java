@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenTTDCraft. If not, see <https://www.gnu.org/licenses/>.
  */
+
 package stone.ottdmc.block.entity;
 
 import net.minecraft.block.entity.BlockEntity;
@@ -28,6 +29,8 @@ public abstract class IndustryBlockEntity extends BlockEntity implements SidedIn
 	private static final int[] slots = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
 	public static int tickTime;
+
+	public static final String TIME_TAG = "createdAt";
 
 	public IndustryBlockEntity(BlockEntityType<?> type) {
 		super(type);

@@ -10,7 +10,8 @@
   ],
 
   "license": "GPL-3",
-
+  "accessWidener": "ottdmc.accesswidener",
+	
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -27,4 +28,5 @@
   "suggests": {
     "ImmersiveRailroading": "*"
   }
+  
 }

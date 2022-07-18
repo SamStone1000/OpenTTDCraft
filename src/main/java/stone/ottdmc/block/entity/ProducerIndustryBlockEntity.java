@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenTTDCraft. If not, see <https://www.gnu.org/licenses/>.
  */
+
 package stone.ottdmc.block.entity;
 
 import net.minecraft.block.entity.BlockEntityType;
