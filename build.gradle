@@ -92,5 +92,4 @@ publishing {
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/ottdmc.accesswidener")
 }
