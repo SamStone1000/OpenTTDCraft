@@ -92,13 +92,13 @@ public class OpenTTDCraft implements ModInitializer, ClientModInitializer, Dedic
 
 		ServerTickEvents.START_WORLD_TICK.register((world) ->
 		{
-			TickScheduler.tickTime++;
+			TickScheduler.onTick();
 		});
 		ServerLifecycleEvents.SERVER_STARTING.register((server) ->
 		{
 			// check for existing tickTime and load it if it
 			// exists
-			TickScheduler.onTick();
+			TickScheduler.tickTime = 0;
 		});
 
 	}
@@ -112,8 +112,6 @@ public class OpenTTDCraft implements ModInitializer, ClientModInitializer, Dedic
 	@Override
 	public void onInitializeServer() {
 		System.out.println("Server Started");
-		TickScheduler.tickTime = 0;
-
 	}
 
 }

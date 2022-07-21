@@ -30,6 +30,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import stone.ottdmc.OpenTTDCraft;
+import stone.ottdmc.util.TickScheduler.ScheduledTask;
 
 /**
  * @author SamSt
@@ -46,6 +47,9 @@ public class FundsManager {
 	private long funds;
 	private long corpId;
 	private int lastTick;
+
+	private TickScheduler scheduler = new TickScheduler();
+	private ScheduledTask task;
 
 	/**
 	 * 
@@ -65,9 +69,17 @@ public class FundsManager {
 
 	public void addFunds(long value) {
 		this.funds += value;
-		if (TickScheduler.tickTime - lastTick > WINDOW)
-			sendPackets();
-		lastTick = TickScheduler.tickTime;
+		if (task == null || task.isClosed()) // task doesn't exist yet or has already been used
+		{
+			task = scheduler.schedule(WINDOW, () ->
+			{
+				this.sendPackets();
+			});
+		}
+		else
+		{
+			task.reschedule(WINDOW);
+		}
 	}
 
 	public void addPlayers(ServerPlayerEntity... players) {

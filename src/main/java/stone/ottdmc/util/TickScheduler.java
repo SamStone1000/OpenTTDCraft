@@ -20,7 +20,6 @@ package stone.ottdmc.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 /**
@@ -35,10 +34,7 @@ public class TickScheduler {
 	 * @author SamSt
 	 *
 	 */
-
-	private LinkedList<ScheduledTask> list;
-	private int nextTask;
-	private boolean hasTask;
+	private boolean isEmpty = true;
 	private PriorityQueue<ScheduledTask> tasks = new PriorityQueue<>();
 
 	private static Collection<TickScheduler> schedulers = new ArrayList<>(1);
@@ -47,7 +43,6 @@ public class TickScheduler {
 	 * 
 	 */
 	public TickScheduler() {
-		hasTask = false;
 		schedulers.add(this);
 	}
 
@@ -61,26 +56,63 @@ public class TickScheduler {
 	}
 
 	public void tick() {
-		if (!hasTask) return; // no task
-		if (nextTask <= tickTime) return; // task is still in the
-											// future
+		if (isEmpty) return; // no task
+		while (!tasks.isEmpty() && tasks.peek().getTime() < tickTime) // task is in the past and tasks has a task
+			tasks.poll().run();
+		isEmpty = tasks.isEmpty();
 	}
 
-	private class ScheduledTask implements Comparable {
+	private void reschedule(ScheduledTask task, int ticks) {
+		tasks.remove(task);
+		task.setTime(ticks);
+		tasks.add(task);
+	}
+
+	public ScheduledTask schedule(int ticks, Runnable run) {
+		isEmpty = false;
+		ScheduledTask temp = new ScheduledTask(ticks, run);
+		tasks.add(temp);
+		return temp;
+	}
+
+	public class ScheduledTask implements Comparable<ScheduledTask> {
 
 		private int time;
+		private Runnable r;
+		private boolean isClosed = false;
 
-		public ScheduledTask(int time) {
-			this.time = time;
+		public ScheduledTask(int time, Runnable run) {
+			this.time = time + tickTime;
+			this.r = run;
+		}
+
+		/**
+		 * @param ticks
+		 */
+		private void setTime(int ticks) {
+			this.time = ticks + tickTime;
 		}
 
 		@Override
-		public int compareTo(Object task) {
+		public int compareTo(ScheduledTask task) {
 			return this.getTime() - task.getTime();
 		}
 
-		public int getTime() {
+		public void run() {
+			r.run();
+			isClosed = true;
+		}
+
+		public boolean isClosed() {
+			return isClosed;
+		}
+
+		protected int getTime() {
 			return time;
+		}
+
+		public void reschedule(int ticks) {
+			TickScheduler.this.reschedule(this, ticks);
 		}
 	}
 
