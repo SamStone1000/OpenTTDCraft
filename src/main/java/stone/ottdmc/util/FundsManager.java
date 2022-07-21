@@ -40,7 +40,7 @@ public class FundsManager {
 
 	public static final Identifier FUNDS_CHANNEL = new Identifier(OpenTTDCraft.MOD_ID, "funds");
 
-	private static final int WINDOW = 20;
+	private static final int WINDOW = 1;
 
 	private final Set<ServerPlayerEntity> PLAYERS = new HashSet<>();
 
@@ -74,14 +74,19 @@ public class FundsManager {
 			task = scheduler.schedule(WINDOW, () ->
 			{
 				this.sendPackets();
-				System.out.println(TickScheduler.tickTime);
 			});
 		}
-		else
-		{
-			task.reschedule(WINDOW);
-		}
-		System.out.println(TickScheduler.tickTime);
+		// if (task == null || task.isClosed()) // task doesn't exist yet or has already been used
+		// {
+		// task = scheduler.schedule(WINDOW, () ->
+		// {
+		// this.sendPackets();
+		// });
+		// }
+		// else
+		// {
+		// task.reschedule(WINDOW);
+		// }
 	}
 
 	public void addPlayers(ServerPlayerEntity... players) {
