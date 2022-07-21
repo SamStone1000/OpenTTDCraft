@@ -1,0 +1,8 @@
+{
+	"package": "stone.ottdmc.mixin",
+	"mixins": [],
+	"client": [
+		"InGameHudMixin"
+	],
+	"server": []
+}

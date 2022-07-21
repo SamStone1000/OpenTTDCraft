@@ -16,26 +16,26 @@
  * along with OpenTTDCraft. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package stone.ottdmc.block.entity;
+package stone.ottdmc.network;
 
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import stone.ottdmc.OpenTTDCraft;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.PlayChannelHandler;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.util.PacketByteBuf;
+import stone.ottdmc.client.FundsHud;
 
-public class CoalIndustryBlockEntity extends ProducerIndustryBlockEntity {
+/**
+ * @author SamSt
+ *
+ */
+public class FundsHandler implements PlayChannelHandler {
 
-	public CoalIndustryBlockEntity(BlockEntityType<?> type) {
-		super(type);
-	}
-
-	public CoalIndustryBlockEntity() {
-		super(OpenTTDCraft.COAL_INDUSTRY_TYPE);
-	}
+	public static final FundsHud FUNDS_HUD = new FundsHud();
 
 	@Override
-	protected Item _getProduct() {
-		return Items.COAL;
+	public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+		FUNDS_HUD.setFunds(buf.readLong());
 	}
 
 }

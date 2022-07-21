@@ -16,26 +16,29 @@
  * along with OpenTTDCraft. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package stone.ottdmc.block.entity;
+package stone.ottdmc.block;
 
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import stone.ottdmc.OpenTTDCraft;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.world.BlockView;
+import stone.ottdmc.block.entity.IronIndustryBlockEntity;
 
-public class CoalIndustryBlockEntity extends ProducerIndustryBlockEntity {
+/**
+ * @author SamSt
+ *
+ */
+public class IronIndustryBlock extends IndustryBlock {
 
-	public CoalIndustryBlockEntity(BlockEntityType<?> type) {
-		super(type);
-	}
-
-	public CoalIndustryBlockEntity() {
-		super(OpenTTDCraft.COAL_INDUSTRY_TYPE);
+	/**
+	 * @param settings
+	 */
+	public IronIndustryBlock(Settings settings) {
+		super(settings);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected Item _getProduct() {
-		return Items.COAL;
+	public BlockEntity createBlockEntity(BlockView var1) {
+		return new IronIndustryBlockEntity();
 	}
 
 }

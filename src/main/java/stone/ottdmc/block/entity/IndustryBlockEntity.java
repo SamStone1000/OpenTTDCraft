@@ -28,9 +28,9 @@ public abstract class IndustryBlockEntity extends BlockEntity implements SidedIn
 
 	private static final int[] slots = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
-	public static int tickTime;
-
-	public static final String TIME_TAG = "createdAt";
+	protected static final String TIME_TAG = "createdAt";
+	protected static final String LOCATION_TAG_X = "CreatedAtX";
+	protected static final String LOCATION_TAG_Z = "CreatedAtZ";
 
 	public IndustryBlockEntity(BlockEntityType<?> type) {
 		super(type);

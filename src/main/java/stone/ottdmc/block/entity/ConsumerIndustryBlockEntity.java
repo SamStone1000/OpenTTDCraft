@@ -20,12 +20,15 @@ package stone.ottdmc.block.entity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
+import stone.ottdmc.util.FundsManager;
 
 /**
  * @author SamSt
  *
  */
 public abstract class ConsumerIndustryBlockEntity extends IndustryBlockEntity {
+
+	private final long corpId = 69;
 
 	public ConsumerIndustryBlockEntity(BlockEntityType<?> type) {
 		super(type);
@@ -64,13 +67,15 @@ public abstract class ConsumerIndustryBlockEntity extends IndustryBlockEntity {
 
 	@Override
 	public void setInvStack(int slot, ItemStack itemStack) {
-		System.out.println(itemStack.getCount());
+		FundsManager.Registry.getManager(corpId).addFunds(itemStack.getCount() * _getResourceValue());
 	}
 
 	@Override
 	public void markDirty() {
 		super.markDirty();
 	}
+
+	protected abstract long _getResourceValue();
 
 	protected abstract ItemStack _getConsumption();
 }

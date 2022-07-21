@@ -23,19 +23,30 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import stone.ottdmc.OpenTTDCraft;
 
-public class CoalIndustryBlockEntity extends ProducerIndustryBlockEntity {
+/**
+ * @author SamSt
+ *
+ */
+public class IronIndustryBlockEntity extends ProducerIndustryBlockEntity {
 
-	public CoalIndustryBlockEntity(BlockEntityType<?> type) {
+	/**
+	 * @param type
+	 */
+	public IronIndustryBlockEntity(BlockEntityType<?> type) {
 		super(type);
+		// TODO Auto-generated constructor stub
 	}
 
-	public CoalIndustryBlockEntity() {
-		super(OpenTTDCraft.COAL_INDUSTRY_TYPE);
+	/**
+	 * 
+	 */
+	public IronIndustryBlockEntity() {
+		super(OpenTTDCraft.IRON_INDUSTRY_TYPE);
 	}
 
 	@Override
 	protected Item _getProduct() {
-		return Items.COAL;
+		return Items.IRON_ORE;
 	}
 
 }

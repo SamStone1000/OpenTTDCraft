@@ -19,13 +19,15 @@
 package stone.ottdmc.block.entity;
 
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
+import stone.ottdmc.util.TickScheduler;
 
 public abstract class ProducerIndustryBlockEntity extends IndustryBlockEntity {
 
-	private ItemStack tempProduct = _getProduct().copy();
+	private ItemStack tempProduct = new ItemStack(_getProduct(), _getProduct().getMaxCount());
 
 	public ProducerIndustryBlockEntity(BlockEntityType<?> type) {
 		super(type);
@@ -74,14 +76,16 @@ public abstract class ProducerIndustryBlockEntity extends IndustryBlockEntity {
 	private ItemStack getProduct() {
 		if (tempProduct.isEmpty())
 		{
-			tempProduct = _getProduct().copy();
+			tempProduct = new ItemStack(_getProduct(), _getProduct().getMaxCount());
 			CompoundTag tag = new CompoundTag();
-			tag.putLong("createdat", tickTime);
+			tag.putInt(TIME_TAG, TickScheduler.tickTime);
+			tag.putInt(LOCATION_TAG_X, pos.getX());
+			tag.putInt(LOCATION_TAG_Z, pos.getZ());
 			tempProduct.setTag(tag);
 		}
 		return tempProduct;
 	}
 
-	protected abstract ItemStack _getProduct();
+	protected abstract Item _getProduct();
 
 }

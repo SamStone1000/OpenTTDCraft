@@ -1,6 +1,8 @@
 {
-	"item.ottdmc.coal_industry": "Coal Industry",
-	"block.ottdmc.coal_industry": "Coal Industry",
+	"item.ottdmc.coal_industry": "Coal Mine",
+	"block.ottdmc.coal_industry": "Coal Mine",
 	"item.ottdmc.power_industry": "Power Plant",
 	"block.ottdmc.power_industry": "Power Plant"
-}
+	"item.ottdmc.iron_industry": "Iron Ore Mine",
+	"block.ottdmc.iron_industry": "Iron Ore Mine"
+}	 

@@ -20,7 +20,7 @@ package stone.ottdmc.block.entity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import stone.ottdmc.Main;
+import stone.ottdmc.OpenTTDCraft;
 
 public class PowerIndustryBlockEntity extends ConsumerIndustryBlockEntity {
 
@@ -31,12 +31,17 @@ public class PowerIndustryBlockEntity extends ConsumerIndustryBlockEntity {
 	}
 
 	public PowerIndustryBlockEntity() {
-		super(Main.POWER_INDUSTRY_TYPE);
+		super(OpenTTDCraft.POWER_INDUSTRY_TYPE);
 	}
 
 	@Override
 	protected ItemStack _getConsumption() {
 		return consumption;
+	}
+
+	@Override
+	protected long _getResourceValue() {
+		return 100;
 	}
 
 }
