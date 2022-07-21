@@ -56,6 +56,7 @@ public class RollingMeter {
 		double perTick = (double) difference / delay;
 		double lastProgress = lastValue + perTick * tickProgress;
 		double currentProgress = lastValue + perTick * (tickProgress + 1);
+		delta *= 20;
 		long lerped = (long) (lastProgress + delta * (currentProgress - lastProgress));
 		realLastValue = lerped;
 		return lerped;
