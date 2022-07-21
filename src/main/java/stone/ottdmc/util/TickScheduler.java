@@ -53,6 +53,7 @@ public class TickScheduler {
 		{
 			scheduler.tick();
 		}
+
 	}
 
 	public void tick() {

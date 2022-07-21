@@ -18,6 +18,8 @@
 
 package stone.ottdmc.util;
 
+import net.minecraft.util.math.MathHelper;
+
 /**
  * @author SamSt
  *
@@ -52,12 +54,11 @@ public class RollingMeter {
 		// lastValue;
 		int tickProgress = TickScheduler.tickTime - lastTick;
 		if (tickProgress > delay) return realValue;
-		long difference = realValue - lastValue;
-		double perTick = (double) difference / delay;
-		double lastProgress = lastValue + perTick * tickProgress;
-		double currentProgress = lastValue + perTick * (tickProgress + 1);
-		delta *= 20;
-		long lerped = (long) (lastProgress + delta * (currentProgress - lastProgress));
+
+		double tickDelta = delta; // convert delta from seconds to ticks
+		double tickProgressFraction = tickDelta + tickProgress; // how many ticks including the fractional part are we through this counter rolling
+		double realDelta = tickProgressFraction / delay;
+		long lerped = (long) MathHelper.lerp(realDelta, lastValue, realValue);
 		realLastValue = lerped;
 		return lerped;
 	}

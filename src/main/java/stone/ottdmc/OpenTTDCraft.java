@@ -90,7 +90,7 @@ public class OpenTTDCraft implements ModInitializer, ClientModInitializer, Dedic
 			FundsManager.Registry.register(69, handler.player);
 		});
 
-		ServerTickEvents.START_WORLD_TICK.register((world) ->
+		ServerTickEvents.END_SERVER_TICK.register((world) ->
 		{
 			TickScheduler.onTick();
 		});

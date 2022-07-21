@@ -74,12 +74,14 @@ public class FundsManager {
 			task = scheduler.schedule(WINDOW, () ->
 			{
 				this.sendPackets();
+				System.out.println(TickScheduler.tickTime);
 			});
 		}
 		else
 		{
 			task.reschedule(WINDOW);
 		}
+		System.out.println(TickScheduler.tickTime);
 	}
 
 	public void addPlayers(ServerPlayerEntity... players) {
