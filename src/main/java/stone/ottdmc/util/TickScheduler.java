@@ -57,7 +57,6 @@ public class TickScheduler {
 	}
 
 	public void tick() {
-		System.out.println(tasks.size());
 		if (isEmpty) return; // no task
 		while (!tasks.isEmpty() && tasks.peek().getTime() < tickTime) // task is in the past and tasks has a task
 			tasks.poll().run();
